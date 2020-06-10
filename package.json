@@ -6,8 +6,8 @@
     "license": "MIT",
     "scripts": {
         "dev": "nodemon --exec babel-node src/server/main.js",
-        "build": "babel src --out-dir build",
-        "start": "pm2 start build/index.js --name 'supersaver'"
+        "build": "babel src --out-dir public",
+        "start": "pm2 start public/server/main.js --name 'chat-engine'"
     },
     "dependencies": {
         "bcrypt": "^4.0.1",
