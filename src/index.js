@@ -2,13 +2,13 @@ import express from "express";
 import http from "http";
 import database from "./app/mongo/database";
 import routes from "./routes";
-import "dotenv/config";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import socketio from "socket.io";
 import { EventIo } from "./server/socket";
 import { msg, SystemLogger } from "./vendor/utils/server";
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 3000;
