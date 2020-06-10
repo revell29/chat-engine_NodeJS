@@ -5,7 +5,7 @@
     "author": "dira",
     "license": "MIT",
     "scripts": {
-        "dev": "nodemon --exec babel-node server/main.js",
+        "dev": "nodemon --exec babel-node src/server/main.js",
         "build": "babel src --out-dir build",
         "start": "pm2 start build/index.js --name 'supersaver'"
     },
