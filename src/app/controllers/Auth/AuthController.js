@@ -13,16 +13,16 @@ class AuthController {
         try {
             const dataUser = await User.findOne({ username: req.body.username });
             if (!dataUser) {
-                return res.status(400).send({ message: "The username does not exist" });
+                return res.status(401).send({ message: "The username does not exist", status: 401 });
             }
             if (!Bcrypt.compareSync(req.body.password, dataUser.password)) {
-                return res.status(400).send({ message: "The password is invalid" });
+                return res.status(401).send({ message: "The password is invalid", status: 401 });
             }
 
             let token = jwt.sign({ username: req.body.username }, config.secret, {
                 expiresIn: "24h", // expires in 24 hours
             });
-            res.send({ message: "The username and password combination is correct!", token: token, data: dataUser });
+            res.status(200).send({ message: "The username and password combination is correct!", token: token, data: dataUser, status: 200 });
         } catch (error) {
             res.status(500).send({ message: error.message });
         }
@@ -42,7 +42,7 @@ class AuthController {
             const result = await dataUser.save();
             res.status(200).send({ message: "Register success", status: 200, data: result });
         } catch (error) {
-            res.send({ message: error.message });
+            res.status(500).send({ message: error.message });
         }
     }
 }
