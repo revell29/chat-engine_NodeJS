@@ -4,10 +4,11 @@
     "main": "index.js",
     "author": "dira",
     "license": "MIT",
+    "type": "module",
     "scripts": {
-        "dev": "nodemon --exec babel-node src/server/index.js",
+        "dev": "nodemon --exec babel-node src/index.js",
         "build": "babel src --out-dir build",
-        "start": "pm2 start build/server/index.js --name 'chat-engine'"
+        "start": "pm2 start build/index.js --name 'chat-engine'"
     },
     "dependencies": {
         "bcrypt": "^4.0.1",
