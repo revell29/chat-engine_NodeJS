@@ -1,6 +1,6 @@
 import express from "express";
 import http from "http";
-import database from "./app/mongo";
+import database from "./app/mongo/database";
 import routes from "./routes";
 import "dotenv/config";
 import bodyParser from "body-parser";
