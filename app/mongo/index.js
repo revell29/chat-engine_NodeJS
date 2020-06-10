@@ -1,3 +1,3 @@
 import "dotenv/config";
-const database = `mongodb://localhost:27017/serverchat`;
+const database = process.env.MONGO_URL;
 export default database;
