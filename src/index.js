@@ -1,1 +1,3 @@
-import "./server/ServerRunning";
+import ServerStartup from "./server/ServerRunning";
+
+ServerStartup();
