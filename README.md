@@ -18,11 +18,9 @@ This repository is for building private chat server or user to user. This engine
 4. run `yarn build` or `npm run build`
 5. and deploy to server
 
-## Available Routes
+## Frontend Web Chat
 
-1. Get history transaction = `example.com/api/history_transaction`
-2. Send Transaction = `example.com/api/store_transaction`
-3. Upload Image receipt = `example.com/api/upload_image`,
+-   [ReactJS](https://github.com/revell29/frontend-private-chat_reactJS)
 
 ## Contact Me
 
