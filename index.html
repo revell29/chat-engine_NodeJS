@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+
+        <title>MongoChat</title>
+        <style>
+            #messages {
+                height: 300px;
+                overflow: auto;
+            }
+
+            .outgoing_message {
+                max-width: 120px;
+                border-radius: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="h-screen">
+            <div class="grid grid-cols-2 h-full">
+                <div id="user-list" class="bg-gray-500 max-w-lg"></div>
+                <div id="user-list2" class="bg-red-500 h-full w-full"></div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+        <script>
+            (function () {
+                const params = new URLSearchParams(window.location.search);
+                console.log(params.get("username"));
+                const username = params.get("username");
+                let sendTo = null;
+                var socket = io.connect("http://127.0.0.1:3000", {
+                    query: {
+                        username: username,
+                    },
+                });
+                const listUser = document.getElementById("user-list");
+
+                fetch(`http://localhost:3000/api/users/${username}`)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        console.log(res);
+                        listUser.innerHTML = "";
+                        res.data.map((item) => {
+                            const li = document.createElement("div");
+                            li.setAttribute("class", "send_to");
+                            li.innerHTML = `
+                            <a href="#" class="child-user" data-id="${item._id}">${item.username}</a>
+                        `;
+                            listUser.appendChild(li);
+                        });
+                    });
+
+                $(document).on("click", ".child-user", function (e) {
+                    e.preventDefault();
+                    sendTo = $(this).text();
+                    getChat();
+                });
+
+                $("#textarea").keyup(function (event) {
+                    var data = $(this).val();
+                    if (event.which == 13) {
+                        sendMessage();
+                    }
+                });
+
+                socket.on("new message", function (data) {
+                    if (username.trim() == data.from.trim()) {
+                        $("#messages").append(
+                            `<div class="outgoing_message bg-primary pull-right">
+                                <div class="sent_msg">
+                                    <p>${data.message}</p>
+                                </div>
+                            </div>`
+                        );
+                    } else if (username.trim() == data.to.trim()) {
+                        $("#messages").append(
+                            `<div class="incoming_msg bg-red">
+                                <div class="incoming_msg_img"><img src="https://ptetutorials.com/images/user-profile.png" alt="${data.from}">
+                                    <span class="username">${username}</span>
+                                    </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>${data.message}</p>
+                                    </div>
+                                </div>
+                            </div>`
+                        );
+                    }
+                });
+
+                function sendMessage() {
+                    var data = $("#textarea").val();
+                    fetch("http://localhost:3000/api/message", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                            from: username,
+                            to: sendTo,
+                            message: data,
+                        }),
+                    })
+                        .then((res) => res.json())
+                        .then((response) => {
+                            socket.emit("new message", {
+                                from: username,
+                                to: sendTo,
+                                message: data,
+                            });
+                            $("#textarea").val("");
+                        });
+                }
+
+                function getChat() {
+                    $("#messages").html("");
+                    fetch("http://localhost:3000/api/message/get_chat", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                            from: username,
+                            to: sendTo,
+                        }),
+                    })
+                        .then((res) => res.json())
+                        .then((response) => {
+                            response.data.map((item) => {
+                                let html = `
+                                    <div class="d-flex flex-column">
+                                        <p>${item.message}</p>
+                                        <p>${item.from}</p>
+                                    </div>
+                                `;
+
+                                $("#messages").append(html);
+                            });
+                            socket.on("new message", function (data) {
+                                console.log(data);
+                            });
+                        });
+                }
+            })();
+        </script>
+    </body>
+</html>
