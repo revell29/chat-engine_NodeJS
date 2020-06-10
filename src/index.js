@@ -9,9 +9,9 @@ import socketio from "socket.io";
 import { EventIo } from "./server/socket";
 import { msg, SystemLogger } from "./vendor/utils/server";
 require("dotenv").config();
+const PORT = process.env.SERVER_PORT || 3010;
 
 const app = express();
-const PORT = process.env.SERVER_PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

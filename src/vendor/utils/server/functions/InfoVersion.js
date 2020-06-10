@@ -3,7 +3,7 @@ let msg = [
     `Chat Engine Version: ${info.version}`,
     `     NodeJS Version: ${process.versions.node} - ${process.arch}`,
     `           Platform: ${process.platform}`,
-    `       Process Port: ${process.env.PORT}`,
+    `       Process Port: ${process.env.SERVER_PORT}`,
     `       Author: ${info.author}`,
     `Github: ${info.github}`,
 ];
