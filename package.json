@@ -19,7 +19,10 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.9.17",
         "morgan": "^1.10.0",
+        "multer": "^1.4.2",
         "nodemon": "^2.0.4",
+        "path": "^0.12.7",
+        "slugify": "^1.4.0",
         "socket.io": "^2.3.0",
         "underscore": "^1.10.2",
         "underscore.string": "^3.3.5"
@@ -28,7 +31,7 @@
         "@babel/cli": "^7.10.1",
         "@babel/core": "^7.10.2",
         "@babel/node": "^7.10.1",
-        "@babel/preset-env": "^7.10.2",
-        "@babel/plugin-proposal-class-properties": "^7.8.3"
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/preset-env": "^7.10.2"
     }
 }

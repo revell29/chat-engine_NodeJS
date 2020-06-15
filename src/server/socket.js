@@ -11,16 +11,24 @@ export function EventIo(io) {
 
         socket.on("send message", (data) => {
             io.to(data.rid).emit("new message", data);
-            console.log(data.rid);
 
             socket.on("received", (data) => {
                 io.to(data.from).emit("received", data);
             });
+            console.log(data);
+        });
+
+        socket.on("typing", (data) => {
+            io.to(data.rid).emmit("typing", data);
         });
 
         socket.on("changeRoom", (data) => {
             socket.leave(data.rid);
             console.log("leave room");
+        });
+
+        socket.on("disconnect", () => {
+            console.log(token, "disconect");
         });
     });
 }

@@ -14,11 +14,19 @@ class MessageController {
 
     static async postMessage(req, res) {
         try {
-            console.log(req.body);
             const { from, to, message, author, rid } = req.body;
-            const dataChat = new Message({ from: from, message: message, to: to, author: req.body.author, rid: req.body.rid });
+            const files = req.file ? req.file.filename : null;
+
+            const dataChat = new Message({
+                from: from,
+                message: message,
+                to: to,
+                author: author,
+                rid: rid,
+                files: files,
+            });
             dataChat.save();
-            ResponseMessage(200, res, "success", message);
+            res.status(200).send({ message: "success", data: dataChat });
         } catch (error) {
             res.status(500).send({ message: error.message });
         }

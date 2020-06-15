@@ -5,13 +5,15 @@ const messageSchema = new schema(
     {
         message: {
             type: String,
-            required: true,
         },
         from: String,
         to: String,
         rid: {
             type: String,
             required: true,
+        },
+        files: {
+            type: String,
         },
         author: {
             type: Schema.Types.ObjectId,
