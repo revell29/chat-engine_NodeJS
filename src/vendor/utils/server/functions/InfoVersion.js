@@ -1,11 +1,11 @@
-const info = require("../../info.json");
+// const info = require("../../info.json");
 let msg = [
-    `Chat Engine Version: ${info.version}`,
+    `Chat Engine Version: 1.0.1-develop`,
     `     NodeJS Version: ${process.versions.node} - ${process.arch}`,
     `           Platform: ${process.platform}`,
     `       Process Port: ${process.env.SERVER_PORT}`,
-    `       Author: ${info.author}`,
-    `Github: ${info.github}`,
+    `       Author: Apsyadira`,
+    `Github: https://github.com/revell29`,
 ];
 
 msg = msg.join("\n");

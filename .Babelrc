@@ -1,16 +1,4 @@
 {
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "targets": {
-                    "node": "14"
-                }
-            }
-        ]
-    ],
-    "plugins": [
-        "@babel/plugin-syntax-dynamic-import",
-        "@babel/plugin-proposal-class-properties"
-    ]
+    "presets": [["@babel/preset-env"]],
+    "plugins": ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-proposal-class-properties", "@babel/plugin-transform-runtime", "@babel/plugin-transform-regenerator"]
 }
