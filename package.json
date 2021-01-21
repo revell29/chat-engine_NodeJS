@@ -24,7 +24,7 @@
         "nodemon": "^2.0.4",
         "path": "^0.12.7",
         "slugify": "^1.4.0",
-        "socket.io": "^2.3.0",
+        "socket.io": "^2.4.0",
         "underscore": "^1.10.2",
         "underscore.string": "^3.3.5"
     },
