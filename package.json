@@ -25,7 +25,7 @@
         "path": "^0.12.7",
         "slugify": "^1.4.0",
         "socket.io": "^2.3.0",
-        "underscore": "^1.10.2",
+        "underscore": "^1.12.1",
         "underscore.string": "^3.3.5"
     },
     "devDependencies": {
